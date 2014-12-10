@@ -1,0 +1,24 @@
+<div class="aw-login-box">
+	<div class="mod-body clearfix">
+		<div class="content pull-left">
+		 	<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+		 	    <%= render "shared/error_messages", target: resource %>
+		 	    <fieldset>
+			        <legend>忘记密码</legend>
+			 	    <%= f.input :email, error: false, input_html: { class: 'form-control',required: true, autofocus: true  } %>
+					<br/>
+					<%= f.submit "找回密码", class: "btn btn-primary", 'data-disable-with' => "正在发送" %>
+				</fieldset>	
+			<% end %>
+		</div>
+		<div class="side-bar pull-left">
+			<h2>China Amateur Football</h2>
+			<h1 class="logo"></h1>
+		</div>
+		<br/>
+	</div>
+	<div class="mod-footer">
+		<%= link_to "注册", new_user_registration_path, html_options = {class: "btn"} %>
+        <%= link_to "登录", new_user_session_path, html_options = {class: "btn"} %>
+	</div>
+</div>	

@@ -1,0 +1,16 @@
+# coding: utf-8
+# Devise User Controller
+class AccountController < Devise::RegistrationsController
+  protect_from_forgery
+
+  def edit
+    @user = current_user
+    # 首次生成用户 Token
+    @user.update_private_token if @user.private_token.blank?
+  end
+
+  def update
+    super
+  end
+
+end

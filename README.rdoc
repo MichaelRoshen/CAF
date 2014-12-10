@@ -1,0 +1,44 @@
+<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-brand">Projectame</a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">首页</a></li>
+        <li><a href="#about"><i class="glyphicon glyphicon-bookmark"></i>活动</a></li>
+        <li><a href="#contact"><i class="glyphicon glyphicon-user"></i>约战</a></li>
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">发起 <span class="caret"></span></a>
+          <ul role="menu" class="dropdown-menu">
+            <li><a href="#"><i class="glyphicon glyphicon-bookmark"></i>活动</a></li>
+            <li><a href="#"><i class="glyphicon glyphicon-user"></i>约战</a></li>
+            <li><a href="#"><i class="glyphicon glyphicon-star-empty"></i>联赛</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/">我的球队</a></li>
+        <li><a href="/">我的主页</a></li>
+        <% if user_signed_in? %>
+	        <li class="dropdown">
+	          <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%= current_user.try(:name) %> <span class="caret"></span></a>
+	          <ul role="menu" class="dropdown-menu">
+	            <li><a href="#">个人资料设置</a></li>
+	            <li><%= link_to "安全退出", destroy_user_session_path, :method => :delete %></li>
+	          </ul>
+	        </li>
+        <% else %>
+            <li><a href="/users/sign_up">注册</a></li>
+            <li><a href="/users/sign_in">登录</a></li>
+        <% end %>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

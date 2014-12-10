@@ -1,0 +1,25 @@
+<div class="aw-login-box">
+	<div class="mod-body clearfix">
+		<div class="content pull-left">
+		 	<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+		        <%= render "shared/error_messages", target: resource %>
+					<%= f.input :login, error: false, input_html: { class: 'form-control' } %>
+					<%= f.input :email, error: false, input_html: { class: "form-control" } %>
+					<%= f.input :password, error: false, input_html: { class: 'form-control' } %>
+					<%= f.input :password_confirmation, error: false, input_html: { class: 'form-control' } %>
+				    <%= f.submit "提交注册信息", class: "btn btn-success" %>
+			<%end-%>
+		</div>
+		<div class="side-bar pull-left">
+			<h2>China Amateur Football</h2>
+			<h1 class="logo"></h1>
+		</div>
+		<br/>
+	</div>
+	<div class="mod-footer">
+		<span>还没有账号?</span>&nbsp;&nbsp;
+		<a href="http://wenda.bootcss.com/account/register/">立即注册</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+		<a href="">游客访问</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+		<a href="http://wenda.bootcss.com/reader/">问答阅读</a>
+	</div>
+</div>	
