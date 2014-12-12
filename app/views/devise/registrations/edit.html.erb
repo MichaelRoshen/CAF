@@ -42,10 +42,6 @@
                         <dd><%= f.input :current_password, input_html: { class: "form-control"} %></dd>
                       </dl> 
                       <dl>
-                        <dt>所在城市:</dt>
-                        <dd><%= f.input :location, input_html: { class: "form-control"} %></dd>
-                      </dl> 
-                      <dl>
                         <dt>QQ:</dt>
                         <dd><%= f.input :location, input_html: { class: "form-control"} %></dd>
                       </dl> 
@@ -54,24 +50,8 @@
                         <dd><%= f.input :location, input_html: { class: "form-control"} %></dd>
                       </dl> 
                       <dl>
-                        <dt>活动范围:</dt>
-                        <dd><%= f.input :territory, input_html: { class: "form-control"} %></dd>
-                      </dl>
-                      <dl>
-                        <dt>擅长位置:</dt>
-                        <dd><%= f.input :position, input_html: { class: "form-control"} %></dd>
-                      </dl> 
-                      <dl>
-                        <dt>职业:</dt>
-                        <dd><%= f.input :career, input_html: { class: "form-control"} %></dd>
-                      </dl> 
-                      <dl>
-                        <dt>所在公司:</dt>
-                        <dd><%= f.input :company, input_html: { class: "form-control" } %></dd>
-                      </dl> 
-                      <dl>
                           <dt>个人简介:</dt>
-                          <dd><%= f.input :bio, as: :text, input_html: { class: "form-control", style: "width:400px;", rows: "6" } %>
+                          <dd><%= f.input :bio, as: :text, input_html: { class: "form-control", style: "width:600px;", rows: "8"} %>
                       </dl>
                       <%= f.submit "更新信息", class: "btn btn-success" %>
                     <% end %>
@@ -79,7 +59,7 @@
                     <div class="side-bar">
                       <dl>
                         <dt class="pull-left">
-                          <%= image_tag(@user.avatar_url(:large)) if @user.avatar? %>
+                          <%= user_avatar_tag(current_user, :large )%>
                         </dt>
                         <dd class="pull-left">
                           <h5>头像设置</h5>

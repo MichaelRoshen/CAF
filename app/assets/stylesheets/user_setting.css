@@ -12,7 +12,7 @@
 /* 鍩烘湰璧勬枡 */
 .aw-user-setting .mod-base{position: relative;}
 .aw-user-setting .mod-base dl{height:auto;line-height: 25px;overflow:hidden;margin:0;padding-bottom: 15px;}
-.aw-user-setting .mod-base dl dt, .aw-user-setting .mod-base dl dd{float: left;line-height: 30px;}
+.aw-user-setting .mod-base dl dt, .aw-user-setting .mod-base dl dd{float: left;line-height: 50px;}
 .aw-user-setting .mod-base dl dt{width: 80px;text-align: right;font-weight: normal;}
 .aw-user-setting .mod-base .introduce input{width: 250px;}
 .aw-user-setting .mod-base dl dd label{min-width: 50px;}

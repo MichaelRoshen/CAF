@@ -6,9 +6,15 @@ class User
   include Mongoid::BaseModel
   
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
+  #个人介绍默认值
+  DEFAULT_USER_BIO = "    1976年9月18日出生在巴西里约热内卢郊外的本托-里贝罗区。世界传奇前锋，绰号外星人，国家队大满贯多次荣获“最佳射手”、“最佳球员”等等荣誉。罗纳尔多曾三度当选世界足球先生、两度当选欧洲足球先生。作为20世纪末以及21世纪初最伟大的球员之一，引领了一个群星璀璨的足球时代。"
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  validates :login, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字,字母,下划线'}, 
+                              length: {:in => 3..20}, presence: true, 
+                              uniqueness: {case_sensitive: false}
 
   field :email, type: String, default: ""
   # Email 的 md5 值，用于 Gravatar 头像
@@ -37,7 +43,7 @@ class User
   field :mobile_phone
   field :location #地区
   field :territory #活动范围
-  field :bio #简介
+  field :bio, default: DEFAULT_USER_BIO
   field :position #位置
   field :career #职业
   field :company #所在公司
