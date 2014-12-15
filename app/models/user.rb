@@ -72,6 +72,16 @@ class User
   # has_many :notifications, class_name: 'Notification::Base', dependent: :delete
   # has_many :photos
 
+  def avatar_file_exist?
+    File::exists?(Rails.root.to_s + "/public/#{self.avatar_url}")
+  end
+
+  def self.find_login(slug)
+    # FIXME: Regexp search in MongoDB is slow!!!
+    raise Mongoid::Errors::DocumentNotFound.new(self, slug: slug) if not slug =~ ALLOW_LOGIN_CHARS_REGEXP
+    where(login: /^#{slug}$/i).first or raise Mongoid::Errors::DocumentNotFound.new(self, slug: slug)
+  end
+
   class << self
     def serialize_from_session(key, salt)
       record = to_adapter.get(key[0]["$oid"])

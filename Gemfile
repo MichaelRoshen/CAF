@@ -18,6 +18,10 @@ gem 'mongoid', '4.0.0'
 # gem 'mongoid_auto_increment_id', '0.6.4'
 gem 'mongoid_rails_migrations', '1.0.0'
 
+
+gem 'actionpack-action_caching', '1.1.1'
+
+
 # 上传组件
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick','3.7.0', require: false

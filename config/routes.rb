@@ -5,6 +5,15 @@ Rails.application.routes.draw do
     :registrations => :account
   }
   
+  get "users" => "users#index", as: 'users'
+  resources :users, path: "" do
+    member do
+      get :topics
+      get :favorites
+      get :notes
+    end
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

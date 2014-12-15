@@ -54,7 +54,7 @@
       </div>
       <% if user_signed_in? %>
         <div class="aw-user-nav">
-          <a class="aw-user-nav-dropdown" href="http://wenda.bootcss.com/people/chenchao">
+          <a class="aw-user-nav-dropdown" href="/bbdd">
           <%= user_avatar_tag(current_user, :normal) %>
           </a>
           <div class="aw-dropdown dropdown-list pull-right">
@@ -92,7 +92,7 @@
       <% end %>
     </div>
   </div>
-<div id="aw-container-wrap" style='margin-top:30px;'>
+<div class="aw-container-wrap">
 	<%= yield %>
 </div>
 <footer class="footer ">

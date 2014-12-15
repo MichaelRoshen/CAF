@@ -21,12 +21,12 @@ module UsersHelper
 
   def user_avatar_tag(user, size = :normal, opts = {})
   	rand_img = "avatar/default_#{size}_user.jpg"
+    
     if user.blank?
-      # hash = Digest::MD5.hexdigest("") => d41d8cd98f00b204e9800998ecf8427e
       return image_tag(rand_img)
     end
 
-    if user[:avatar].present? && File::exists?(Rails.root + "/#{user.avatar_url}")
+    if user[:avatar].present? && user.avatar_file_exist?
         img = image_tag(user.avatar_url(size))
     else
     	img = image_tag(asset_path(rand_img))
