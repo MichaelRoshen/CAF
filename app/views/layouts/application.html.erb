@@ -54,7 +54,7 @@
       </div>
       <% if user_signed_in? %>
         <div class="aw-user-nav">
-          <a class="aw-user-nav-dropdown" href="/bbdd">
+          <a class="aw-user-nav-dropdown" href="/<%= current_user.login %>">
           <%= user_avatar_tag(current_user, :normal) %>
           </a>
           <div class="aw-dropdown dropdown-list pull-right">
