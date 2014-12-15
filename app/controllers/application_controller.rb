@@ -8,6 +8,37 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token
   
   before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  def require_user
+    if current_user.blank?
+      respond_to do |format|
+        format.html { authenticate_user! }
+        format.all { head(:unauthorized) }
+      end
+    end
+  end
+
+  def render_404
+    render_optional_error_file(404)
+  end
+
+  def render_403
+    render_optional_error_file(403)
+  end
+
+  def render_optional_error_file(status_code)
+    status = status_code.to_s
+    fname = %W(404 403 422 500).include?(status) ? status : 'unknown'
+    render template: "/errors/#{fname}", format: [:html],
+           handler: [:erb], status: status, layout: 'application'
+  end
+  
+  def set_seo_meta(title = '', meta_keywords = '', meta_description = '')
+    @page_title = "#{title}" if title.length > 0
+    @meta_keywords = meta_keywords
+    @meta_description = meta_description
+  end
+
   protected
 
   def configure_permitted_parameters

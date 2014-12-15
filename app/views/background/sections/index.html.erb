@@ -1,0 +1,27 @@
+<% content_for :sitemap do %>
+  <span class="current"><%= "帖子：一级类别" %></span>
+<% end %>
+<h1>帖子：一级类别</h1>
+
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">ID</td>
+    <td>名称</td>
+    <td>排序</td>
+    <td>操作</td>
+  </tr>
+
+<% @sections.each do |section| %>
+  <tr>
+    <td class="first"><%= section.id %></td>
+    <td><%= section.name %></td>
+    <td><%= section.sort %></td>
+    <td><%= link_to '编辑', edit_background_section_path(section), class: "icon small_edit" %>
+    <%= link_to '删除', background_section_path(section), 'data-confirm' => 'Are you sure?', method: :delete, class: "icon small_delete" %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '创建', new_background_section_path %>

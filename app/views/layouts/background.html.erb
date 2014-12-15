@@ -22,33 +22,11 @@
       <div class="aw-logo hidden-xs">
         <a href="http://localhost:3000"></a>
       </div>
-      <div class="aw-search-box  hidden-xs hidden-sm">
-        <form method="post" id="global_search_form" action="http://wenda.bootcss.com/search/" class="navbar-search">
-          <input type="text" id="aw-search-query" name="q" autocomplete="off" placeholder="搜索" class="form-control search-query">
-          <span onclick="$('#global_search_form').submit();" id="global_search_btns" title="搜索"><i class="icon icon-search"></i></span>
-          <div class="aw-dropdown">
-            <div class="mod-body">
-              <p class="title">输入关键字进行搜索</p>
-              <ul class="aw-dropdown-list hide"></ul>
-              <p class="search"><span>搜索:</span><a onclick="$('#global_search_form').submit();"></a></p>
-            </div>
-          </div>
-        </form>
-      </div>
       <div class="aw-top-nav navbar">
-        <div class="navbar-header">
-            <button class="navbar-toggle pull-left">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
-              <li><a href="#"><i class="icon icon-bookmarks"></i>活动</a></li>
-              <li><a href="#"><i class="icon icon-users"></i>约战</a></li>
-              <li><a href="#"><i class="icon icon-vimeo"></i>联赛</a></li>
-              <li><a href="#"><i class="icon icon-plus"></i>招新</a></li>
+              <li><%= link_to("一级节点", background_sections_path) %><li>
+              <li><%= link_to("二级节点", background_nodes_path) %><li>
           </ul>
         </nav>
       </div>

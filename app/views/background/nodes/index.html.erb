@@ -1,0 +1,31 @@
+<% content_for :sitemap do %>
+  <span class="current">节点</span>
+<% end %>
+<h1>所有节点</h1>
+
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">ID</td>
+    <td>名称</td>
+    <td>一级节点</td>
+    <td>排序</td>
+    <td>主题数量</td>
+    <td>删除</td>
+  </tr>
+
+<% @nodes.each do |node| %>
+  <tr>
+    <td class="first"><%= node.id %></td>
+    <td><%= node.name %></td>
+    <td><%= node.section.name %></td>
+    <td><%= node.sort %></td>
+    <td><%= node.topics_count %></td>
+    <td><%= link_to '修改', edit_background_node_path(node), class: "icon small_edit" %>
+    <%= link_to '删除', background_node_path(node), 'data-confirm' => 'Are you sure?' , method: :delete, class: "icon small_delete" %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '创建节点', new_background_node_path %>

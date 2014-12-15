@@ -45,6 +45,11 @@ gem 'devise-encryptable', '0.1.2'
 # 分页
 gem 'will_paginate', '3.0.7'
 
+# Markdown 格式 & 文本处理
+gem 'redcarpet', '~> 3.0.0'
+gem 'rouge', '~> 1.3.4'
+gem 'auto-space', '0.0.4'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

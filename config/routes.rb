@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   devise_for :users, path: "account", :controllers => {
     :registrations => :account
   }
-  
+
+  namespace :background do
+    resources :sections
+    resources :nodes
+  end
+
   get "users" => "users#index", as: 'users'
   resources :users, path: "" do
     member do
