@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  
+  resources :teams
+
   root to: "home#index"
 
   devise_for :users, path: "account", :controllers => {
@@ -18,6 +21,8 @@ Rails.application.routes.draw do
       get :notes
     end
   end
+
+  match '*path', via: :all, to: 'home#error_404'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

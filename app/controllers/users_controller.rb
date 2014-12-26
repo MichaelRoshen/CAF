@@ -1,8 +1,11 @@
 # coding: utf-8
 require 'will_paginate/array'
 class UsersController < ApplicationController
+  layout "no_wrapper"
   before_filter :find_user, only: [:show, :topics, :favorites, :notes]
+  before_filter :validate_user
   caches_action :index, expires_in: 2.hours, layout: false
+
 
   def index
     @total_user_count = User.count
@@ -11,7 +14,7 @@ class UsersController < ApplicationController
 
   def show
     # 排除掉几个非技术的节点
-    without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
+    # without_node_ids = [21, 22, 23, 31, 49, 51, 57, 25]
     # @topics = @user.topics.without_node_ids(without_node_ids).high_likes.limit(20)
     # @replies = @user.replies.only(:topic_id, :body_html, :created_at).recent.includes(:topic).limit(10)
     # set_seo_meta("#{@user.login}")
@@ -62,6 +65,11 @@ class UsersController < ApplicationController
       render_404
       return
     end
+  end
+
+  #根目录下访问某用户主页的时候，如果找不到这个人，则跳转到404页面
+  def validate_user
+     render_404 if @user.nil?
   end
 
   protected

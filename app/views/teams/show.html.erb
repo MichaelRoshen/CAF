@@ -6,18 +6,12 @@
                 <!-- 用户数据内容 -->
                 <div class="aw-mod aw-user-detail-box">
                     <div class="mod-head">
-                        <%= user_avatar_tag(@user, :big) %>
-                        <h1><%= @user.login %></h1>
+                        <%= team_avatar_tag(@team, :big) %>
+                        <h1><%= @team.name %></h1>
                         <p class="text-color-999"></p>
                         <p class="aw-user-flag">
                             <span>
-                               <%= @user.bio %>
-                            </span>
-
-                        </p>
-                        <p class="aw-user-flag">
-                            <span>
-                                <%= @user.bio %>   
+                                <%= @team.bio %>   
                             </span>
                         </p>
                     </div>
@@ -148,11 +142,23 @@
                 </div>
             </div>
             <!-- 侧边栏 -->
-            <%= render :partial => "users/user_right" %>
+            <div class="col-sm-3 col-md-3 aw-side-bar hidden-sm hidden-xs">
+                <!-- 今日话题 -->
+                <div class="aw-mod topic-daily hidden-xs">
+                    <div class="mod-head" style="margin-left:40px;">
+                        <a class="btn btn-success" href="javascript:;" onclick="disp_join_dialog();">申请加入球队</a>
+                    </div>
+                </div>
+                <!-- end 今日话题 -->
+                <div class="aw-mod">
+                    <div class="mod-body">
+                    	<%= render :partial=>"users/nav_user" %>
+                    </div>
+                </div>
+            </div>
             <!-- end 侧边栏 -->
         </div>
     </div>
   </div>
 </div>
-<%= render :partial => "create_and_join_team" %>
       

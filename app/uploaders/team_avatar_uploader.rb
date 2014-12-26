@@ -1,7 +1,11 @@
 # coding: utf-8
-class AvatarUploader < BaseUploader
-  version :normal do
+class TeamAvatarUploader < BaseUploader
+  version :small do
     process resize_to_fill: [48, 48]
+  end
+
+  version :normal do
+    process resize_to_fill: [72, 72]
   end
 
   version :big do
@@ -9,7 +13,7 @@ class AvatarUploader < BaseUploader
   end
 
   version :large do
-    process resize_to_fill: [240, 300]
+    process resize_to_fill: [320, 360]
   end
 
   def filename
@@ -22,3 +26,4 @@ class AvatarUploader < BaseUploader
     %w(jpg jpeg png)
   end
 end
+

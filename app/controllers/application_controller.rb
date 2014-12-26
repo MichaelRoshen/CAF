@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user!, :except => [:index] 
+  # before_action :authenticate_user!, :except => [:index] 
 
   skip_before_filter :verify_authenticity_token
   
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def render_404
     render_optional_error_file(404)
-  end
+  end   
 
   def render_403
     render_optional_error_file(403)

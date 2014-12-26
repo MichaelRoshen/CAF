@@ -70,7 +70,12 @@ class User
   # has_many :replies, dependent: :destroy
   # embeds_many :authorizations
   # has_many :notifications, class_name: 'Notification::Base', dependent: :delete
-  # has_many :photos
+  has_and_belongs_to_many :admin_of,  class_name: "Team"
+  has_and_belongs_to_many :member_of, class_name: "Team"
+
+  def had_create_a_team?
+    Team.where(creater_id: self.id).first.present?
+  end
 
   def avatar_file_exist?
     File::exists?(Rails.root.to_s + "/public/#{self.avatar_url}")
@@ -78,8 +83,7 @@ class User
 
   def self.find_login(slug)
     # FIXME: Regexp search in MongoDB is slow!!!
-    raise Mongoid::Errors::DocumentNotFound.new(self, slug: slug) if not slug =~ ALLOW_LOGIN_CHARS_REGEXP
-    where(login: /^#{slug}$/i).first or raise Mongoid::Errors::DocumentNotFound.new(self, slug: slug)
+    where(login: /^#{slug}$/i).first
   end
 
   class << self

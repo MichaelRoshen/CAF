@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="aw-content-wrap clearfix">
+      <div class="aw-user-setting">
+        <div class="tabbable">
+          <ul class="nav nav-tabs aw-nav-tabs active">
+            <h2><i class="icon icon-quill"></i> 球队设置</h2>
+          </ul>
+        </div>
+        <div class="tab-content clearfix">
+          <div class="aw-mod">
+            <div class="mod-body">
+              <div class="aw-mod mod-base">
+                <div class="mod-head">
+                  <h3>基本信息</h3>
+                </div>
+                <%= render 'form' %>
+                    <!-- 上传头像 -->
+                    <div class="side-bar">
+                      <dl>
+                        <dt class="pull-left">
+                          <%= team_avatar_tag(@team, :large )%>
+                        </dt>
+                        <dd class="pull-left">
+                          <h5>队徽设置</h5>
+                          <p>支持 jpg、gif、png 等格式的图片</p>
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<noscript id="noscript" unselectable="on">
+    &lt;div class="aw-404 aw-404-wrap container"&gt;
+        &lt;img src="http://wenda.bootcss.com/static/common/no-js.jpg"&gt;
+        &lt;p&gt;你的浏览器禁用了JavaScript, 请开启后刷新浏览器获得更好的体验!&lt;/p&gt;
+    &lt;/div&gt;
+</noscript>
+<div class="aw-top-menu-wrap">
+    <div class="container">
+      <div class="aw-logo hidden-xs">
+        <a href="http://localhost:3000"></a>
+      </div>
+      <div class="aw-search-box  hidden-xs hidden-sm">
+        <form method="post" id="global_search_form" action="http://wenda.bootcss.com/search/" class="navbar-search">
+          <input type="text" id="aw-search-query" name="q" autocomplete="off" placeholder="搜索" class="form-control search-query">
+          <span onclick="$('#global_search_form').submit();" id="global_search_btns" title="搜索"><i class="icon icon-search"></i></span>
+          <div class="aw-dropdown">
+            <div class="mod-body">
+              <p class="title">输入关键字进行搜索</p>
+              <ul class="aw-dropdown-list hide"></ul>
+              <p class="search"><span>搜索:</span><a onclick="$('#global_search_form').submit();"></a></p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="aw-top-nav navbar">
+        <div class="navbar-header">
+            <button class="navbar-toggle pull-left">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+              <li><a href="#"><i class="icon icon-bookmarks"></i>活动</a></li>
+              <li><a href="#"><i class="icon icon-users"></i>约战</a></li>
+              <li><a href="#"><i class="icon icon-vimeo"></i>联赛</a></li>
+              <li><a href="#"><i class="icon icon-plus"></i>招新</a></li>
+          </ul>
+        </nav>
+      </div>
+      <% if user_signed_in? %>
+        <div class="aw-user-nav">
+          <a class="aw-user-nav-dropdown" href="/<%= current_user.login %>">
+          <%= user_avatar_tag(current_user, :normal) %>
+          </a>
+          <div class="aw-dropdown dropdown-list pull-right">
+            <ul class="aw-dropdown-list">
+              <li>
+                <a href="http://wenda.bootcss.com/inbox/">
+                  <i class="icon icon-inbox"></i> 私信
+                  <span id="inbox_unread" class="badge badge-important hide" style="display: none;">0
+                  </span>
+                </a>
+              </li>
+              <li class="hidden-xs">
+                <%=  link_to "设置", edit_user_registration_path %>
+              </li>
+              <li><%= link_to "退出", destroy_user_session_path, method: "delete" %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="aw-publish-btn">
+          <a class="btn-primary" href="http://wenda.bootcss.com/publish/" id="header_publish"><i class="icon icon-bullhorn"></i>发起</a>
+          <div class="dropdown-list pull-right">
+            <ul>
+              <li><a href="http://wenda.bootcss.com/publish/">问题</a></li>
+              <li><a href="http://wenda.bootcss.com/publish/article/">文章</a></li>
+            </ul>
+          </div>
+        </div>        
+      <% else %>
+        <div class="aw-user-nav">
+          <span>
+            <%= link_to "注册", new_user_registration_path, html_options = {class: "register btn btn-normal btn-success"} %>
+            <%= link_to "登录", new_user_session_path, html_options = {class: "login btn btn-normal btn-primary"} %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+</div>

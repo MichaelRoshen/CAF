@@ -6,7 +6,7 @@ class Background::ApplicationController < ApplicationController
   # before_filter :set_active_menu
 
   def require_admin
-    if not false
+    if not true
       render_404
     end
   end

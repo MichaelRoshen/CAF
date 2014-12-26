@@ -1,0 +1,45 @@
+<%= simple_form_for(@team, as: "team", url: team_path(@team), html: { method: :put, enctype:  "multipart/form-data" }) do |f| %>
+<div class="mod-body">
+  <div style="width:50%;">
+    <%= render "shared/error_messages", target: @team %>
+  </div>  
+  <dl>
+    <dt>球队名称:</dt>
+    <dd><%= f.input :name, input_html: { class: "form-control" } %></dd>
+  </dl>  
+  <dl>
+    <dt>球队队徽:</dt>
+    <dd><%= f.input :avatar %></dd>
+  </dl>    
+  <dl>  
+  <dl>
+    <dt>所在地区:</dt>
+    <dd><%= f.input :location, input_html: { class: "form-control" } %></dd>
+  </dl> 
+  <dl>
+    <dt>活动区域:</dt>
+    <dd><%= f.input :territory, input_html: { class: "form-control" } %></dd>
+  </dl> 
+  <dl>
+    <dt>联系人QQ:</dt>
+    <dd><%= f.input :qq, input_html: { class: "form-control"} %></dd>
+  </dl> 
+  <dl>
+    <dt>联系电话:</dt>
+    <dd><%= f.input :mobile_phone, input_html: { class: "form-control"} %></dd>
+  </dl> 
+  <dl>
+	  <dt>球队简介:</dt>
+	  <dd><%= f.input :bio, as: :text, input_html: { class: "form-control", style: "width:600px;", rows: "8"} %>
+  </dl>
+  <dl>
+	  <dt>球队荣誉:</dt>
+	  <dd><%= f.input :honor, as: :text, input_html: { class: "form-control", style: "width:600px;", rows: "8"} %>
+  </dl>  
+  <dl>
+	  <dt>球队文化:</dt>
+	  <dd><%= f.input :culture, as: :text, input_html: { class: "form-control", style: "width:600px;", rows: "8"} %>
+  </dl>
+
+  <%= f.submit "保存信息", class: "btn btn-success" %>
+<% end %>
