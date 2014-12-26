@@ -73,6 +73,10 @@ class User
   has_and_belongs_to_many :admin_of,  class_name: "Team"
   has_and_belongs_to_many :member_of, class_name: "Team"
 
+  def own_team
+    Team.where(creater_id: self.id).first
+  end
+
   def had_create_a_team?
     Team.where(creater_id: self.id).first.present?
   end

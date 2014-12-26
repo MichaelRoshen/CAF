@@ -53,21 +53,17 @@
                   </span>
                 </a>
               </li>
-              <li class="hidden-xs">
-                <%=  link_to "设置", edit_user_registration_path %>
-              </li>
+              <li><%=  link_to "我的主页", "/#{current_user.login}" %></li>
+              <li><%=  link_to "个人设置", edit_user_registration_path %></li>
+              <% if current_user.had_create_a_team? %>
+                <li><%=  link_to "球队设置", edit_team_path(current_user.own_team) %></li>
+              <% end %>
               <li><%= link_to "退出", destroy_user_session_path, method: "delete" %></li>
             </ul>
           </div>
         </div>
         <div class="aw-publish-btn">
-          <a class="btn-primary" href="http://wenda.bootcss.com/publish/" id="header_publish"><i class="icon icon-bullhorn"></i>发起</a>
-          <div class="dropdown-list pull-right">
-            <ul>
-              <li><a href="http://wenda.bootcss.com/publish/">问题</a></li>
-              <li><a href="http://wenda.bootcss.com/publish/article/">文章</a></li>
-            </ul>
-          </div>
+          <a class="btn-primary" href="<%= new_topic_path%>" ><i class="icon icon-bullhorn"></i>发起</a>
         </div>        
       <% else %>
         <div class="aw-user-nav">
