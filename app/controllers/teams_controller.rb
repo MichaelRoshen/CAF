@@ -22,7 +22,7 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
-    if current_user.present?
+    unless current_user.present?
       render :json => {:msg => '登录后才能创建球队！', :status => false} and return
     end
     if current_user.had_create_a_team?
