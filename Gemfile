@@ -21,6 +21,8 @@ gem 'mongoid_rails_migrations', '1.0.0'
 
 gem 'actionpack-action_caching', '1.1.1'
 
+# permission
+gem 'cancancan', '~> 1.8.4'
 
 # 上传组件
 gem 'carrierwave', '~> 0.10.0'

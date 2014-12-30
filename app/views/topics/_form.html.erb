@@ -1,18 +1,22 @@
-<%= simple_form_for([:cpanel,@topic]) do |f| %>
-  <%= render 'shared/error_messages', target: @topic %>
-  <fieldset>
-    <legend></legend>
+<%= simple_form_for @topic do |f| %>
+  <%= render "shared/error_messages", target: @topic %>
+  <div class="control-group">
+    <% if @topic.lock_node == false || admin? %>
+      <span class="node-select span2">
+        <%= render_topic_node_select_tag(@topic) %>
+      </span>
+    <% end %>
+    <%= f.text_field :title, class: "span5", placeholder: "在这里填写标题" %>
+  </div>
+  
+  <div class="control-group edit-tools">
+  </div>
+  
+  <div class="control-group">
+    <%= f.text_area :body, class: "topic-editor closewarning" %>
+  </div>
 
-    <%= f.input :title, input_html: { class: "span10" } %>
-    <%= f.input :node_id %>
-    <%= f.input :user_id %>
-    <%= f.input :last_reply_user_id %>
-    <%= f.input :source %>
-    <%= f.input :body, as: :text, input_html: { class: "span8", rows: "10"} %>
-    <div class="form-actions">
-      <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
-      or
-      <%= link_to 'Back', cpanel_topics_path %>
-    </div>
-  </fieldset>
+  <div class="control-group">
+    <%= f.submit "save", class: "btn btn-primary", 'data-disable-with' => "saving" %>
+  </div>
 <% end %>

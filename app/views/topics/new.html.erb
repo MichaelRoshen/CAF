@@ -1,6 +1,7 @@
-<% content_for :sitemap do %>
-  <a href="<%= cpanel_topics_path %>"><%= t("cpanel.menu.topics")%></a> &gt; <span class="current"><%= t("common.create")%></span>
-<% end %>
-<h1>New topic</h1>
+<div class="content">
+  <div class="box">
+    <%= render 'form' %>
+  </div>
+</div>
 
-<%= render 'form' %>
+

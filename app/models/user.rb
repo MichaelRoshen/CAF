@@ -65,13 +65,25 @@ class User
   index location: 1
   index({private_token: 1},{ sparse: true })
 
-  # has_many :topics, dependent: :destroy
+  has_many :topics, dependent: :destroy
   # has_many :notes
   # has_many :replies, dependent: :destroy
   # embeds_many :authorizations
   # has_many :notifications, class_name: 'Notification::Base', dependent: :delete
   has_and_belongs_to_many :admin_of,  class_name: "Team"
   has_and_belongs_to_many :member_of, class_name: "Team"
+
+  def has_role?(role)
+    case role
+      when :admin then admin?
+      when :member then self.state == STATE[:normal]
+      else false
+    end
+  end
+
+  def admin?
+    true
+  end
 
   def own_team
     Team.where(creater_id: self.id).first

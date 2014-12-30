@@ -1,51 +1,49 @@
-<% content_for :sitemap do %>
-  <span class="current"><%= t("cpanel.menu.topics")%></span>
+<div class="content">
+  <div class="box box-gray">
+    <div id="node-info">
+      <%= render "topics/node_info", node: @node %>
+    </div>
+
+    <div class="topics">
+      <% if @topics.current_page == 1 %>
+        <% cache(@suggest_topics) do %>
+          <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
+        <% end %>
+      <% end %>
+      <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
+    </div>
+    <%= will_paginate @topics, inner_window: 2 %>
+
+  </div>
+
+  <% if controller_name == "topics" && action_name == "index" && !mobile? %>
+    <%= render "/shared/index_sections" %>
+    <%= render "/shared/hot_locations" %>
+  <% end %>
+
+  <% if !@node.blank? %>
+    <% content_for :node_feed_link do %>
+      <%= auto_discovery_link_tag(:rss, feed_node_topics_url, title: "#{@node.name} 节点最新话题") %>
+    <% end %>
+  <% end %>
+
+</div>
+
+<% if current_user %>
+<script type="text/javascript">
+  var readed_topic_ids = <%= current_user.filter_readed_topics(@topics) %>;
+  readed_topic_ids = readed_topic_ids.concat(<%= current_user.filter_readed_topics(@suggest_topics) %>);
+  for (var i = 0; i < readed_topic_ids.length; i++) {
+    topic_id = readed_topic_ids[i];
+    $(".topic-"+ topic_id + " .right-info .count").addClass("state-true");
+  }
+</script>
 <% end %>
-<h1><%= t("cpanel.topic_list")%></h1>
 
-<table class="table table-bordered table-striped table-condensed">
-  <tr class="head">
-    <td class="first">ID</td>
-    <td style="width:300px">Title</td>
-    <td>Node</td>
-    <td>User</td>
-    <td>Replies</td>
-    <td>at</td>
-    <td style="width:100px"></td>
-  </tr>
-
-<% @topics.each do |topic| %>
-  <tr class="<%= 'deleted' if !topic.deleted_at.blank? %>">
-    <td class="first"><%= topic.id %></td>
-    <td>
-      <%= truncate(topic.title, length: 30) %>
-    </td>
-    <td><%= topic.node.name if topic.node %></td>
-    <td><%= topic.user.login if topic.user %></td>
-    <td><%= topic.replies_count %></td>
-    <td>
-      <% if topic.deleted_at.blank? %>
-        <%= l topic.created_at, format: :short %>
-      <% else %>
-        <%= link_to topic.who_deleted, user_path(topic.who_deleted) if not topic.who_deleted.blank? %> 删除于 <br />
-        <%= l topic.deleted_at, format: :short %>
-      <% end %>
-    </td>
-    <td>
-      <% if !topic.suggested_at.blank? %>
-        <%= link_to t("common.un_top"), unsuggest_cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :post %>
-      <% else %>
-        <%= link_to t("common.place_top"), suggest_cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :post %>
-      <% end %>
-      <%= link_to "", edit_cpanel_topic_path(topic), class: "icon small_edit" %>
-      <% if topic.deleted_at.blank? %>
-        <%= link_to "", cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :delete, class: "icon small_delete" %>
-      <% else %>
-        <%= link_to t("common.undelete"), undestroy_cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', method: :post %>
-      <% end %>
-    </td>
-
-  </tr>
+<% if !mobile? %>
+  <div class="sidebar">
+    <%= render "topics/sidebar_for_topic_index" if action_name.in?(%w(index)) %>
+    <%= render "topics/sidebar_for_topic_recent" if action_name.in?(%w(recent no_reply popular excellent)) %>
+    <%= render "topics/sidebar_for_topic_node" if action_name == "node" %>
+  </div>
 <% end %>
-</table>
-<%= will_paginate @topics %>

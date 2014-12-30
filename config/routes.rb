@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   resources :teams
+  resources :topics
 
   root to: "home#index"
 
