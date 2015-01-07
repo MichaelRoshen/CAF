@@ -2,21 +2,21 @@
   <%= render "shared/error_messages", target: @topic %>
   <div class="control-group">
     <% if @topic.lock_node == false || admin? %>
-      <span class="node-select span2">
+      <span class="node-select">
         <%= render_topic_node_select_tag(@topic) %>
       </span>
     <% end %>
-    <%= f.text_field :title, class: "span5", placeholder: "在这里填写标题" %>
+    <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题.." %>
   </div>
   
   <div class="control-group edit-tools">
   </div>
   
   <div class="control-group">
-    <%= f.text_area :body, class: "topic-editor closewarning" %>
+    <%= f.text_area :body, class: "topic-editor closewarning form-control" %>
   </div>
 
   <div class="control-group">
-    <%= f.submit "save", class: "btn btn-primary", 'data-disable-with' => "saving" %>
+    <%= f.submit "保存", class: "btn btn-primary", 'data-disable-with' => "保存中.." %>
   </div>
 <% end %>

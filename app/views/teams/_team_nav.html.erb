@@ -1,0 +1,10 @@
+<dl>
+    <dt class="pull-left aw-border-radius-7">
+        <%= link_to team_avatar_tag(@user.own_team, :normal ), team_path(@user.own_team) %>
+    </dt>
+    <dd class="pull-left">
+        <%= link_to @user.own_team.name, team_path(@user.own_team), class: "aw-user-name" %>
+        <p class="signature"></p>
+        <p>共<b><%= @user.own_team.user_count %></b> 个成员
+    </dd>
+</dl>

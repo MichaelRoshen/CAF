@@ -1,93 +1,56 @@
-<% content_for :scripts do %>
-  <script type="text/javascript">
-    Topics.replies_per_page = <%= @per_page %>;
-    $(document).ready(function(){
-      <% if admin? %>
-        $("#replies .reply a.edit").css('display','inline-block');
-      <% elsif current_user %>
-        $("#replies .reply a.edit[data-uid='<%= current_user.id %>']").css('display','inline-block');
-      <% end %>
-      <% if current_user && !@user_liked_reply_ids.blank? %>
-        Topics.checkRepliesLikeStatus([<%= @user_liked_reply_ids.join(",") %>]);
-      <% end %>
-    })
-  </script>
-<% end %>
+<div class="aw-container-wrap">
+  <div class="container">
+    <div class="row">
+      <div class="aw-content-wrap clearfix">
+        <div class="col-sm-12 col-md-9 aw-main-content">
+          <div class="aw-mod aw-question-detail aw-item">
+            <div class="mod-head">
+              <h1>
+                <a class="aw-user-nav-dropdown" href="/<%= @topic.user.login %>">
+                  <%= user_avatar_tag(@user, :normal) %>
+                </a>
+                <%= @topic.title %>
+              </h1>
+              <span class="text-color-999">回复了问题 • 6 人关注 • 4 个回复 • 1370 次浏览 • 2014-12-20 12:46</span>
+              <div class="operate clearfix">
+                <% if current_user.id == @user.id %>
+                  <a href="<%= edit_topic_path(@topic) %>" class="btn btn-small btn-warning">修改</a>
+                <% end %>
+              </div>
+            </div>
+            <div class="mod-body">
+              <div class="content markitup-box">
+                <%= @topic.body %>
+              </div>
+            </div>
+            <div class="mod-footer">
+              <div class="meta">
+                <div class="pull-right more-operate">
+                  <a class="aw-icon-thank-tips text-color-999" onclick="AWS.User.question_thanks($(this), 155);" data-original-title="感谢提问者" data-toggle="tooltip" title="" data-placement="bottom">
+                    <i class="icon icon-thank"></i>喜欢
+                  </a>
+                  
+                  <a onclick="AWS.dialog('report', {item_type:'question', item_id:155})" class="text-color-999" href="javascript:;">
+                    <i class="icon icon-report"></i>收藏
+                  </a>    
 
-<div class="content">
-  <div id="topic-show" class="topics box hfeed">
-    <div class="topic hentry">
-      <%= render partial: "topics/topic_info", locals: { topic: @topic } %>
-      <%= raw SiteConfig.before_topic_html %>
-      <div class="body markdown-body entry-content">
-        <%= sanitize_topic @topic.body_html %>
-      </div>
+                  <a data-toggle="dropdown" class="text-color-999 dropdown-toggle">
+                    <i class="icon icon-share"></i>分享
+                  </a>
 
-      <% if @topic.excellent? %>
-      <div class="excellent">
-        <i class="icon small_cert_on"></i> 本帖已被设为精华帖！
-        <% if admin? %>
-        <div class="opts pull-right">
-          <%= link_to "取消", unsuggest_topic_path(@topic.id), method: "delete" %>
-        </div>
-        <% end %>
-      </div>
-      <% end %>
-
-      <%= raw SiteConfig.after_topic_html %>
-
-      <%= render "buttons" %>
-    </div>
-  </div>
-
-  <% if @replies.blank? %>
-    <div class="no-result">
-      <%= t("topics.no_replies") %>
-    </div>
-    <% else %>
-    <div id="replies" class="box box-gray" data-last-floor="<%= @replies.count %>">
-      <div class="total">
-        共收到 <b><%= @topic.replies_count %></b> 条回复
-      </div>
-      <div class="items">
-        <%= cache([@topic,params[:page],"raw:#{@show_raw}"]) do %>
-          <%= render partial: "replies/reply", collection: @replies %>
-        <% end %>
-      </div>
-      <%= will_paginate @replies, inner_window: 2, params: { anchor: 'replies' } %>
-    </div>
-  <% end %>
-
-  <% if current_user %>
-    <div id="reply" class="form box">
-      <% if can? :create, Reply %>
-        <%= render "editor_toolbar" %>
-        <%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
-          <%= f.text_area :body, class: "topic-editor span10", rows: "4", tabindex: "1" %>
-          <div class="submit-buttons">
-            <button type="submit" id="btn_reply" class="btn btn-primary" tabindex="2"><%= t("topics.submit_reply")%></button><br />
-            <span class="help-inline" title="或者 Command + Enter">Ctrl+Enter</span>
+                  <div class="aw-dropdown shareout pull-right" role="menu" aria-labelledby="dropdownMenu">
+                    <ul class="aw-dropdown-list">
+                      <li><a onclick="AWS.User.share_out('tsina');"><i class="icon icon-weibo"></i> 新浪微博</a></li>
+                      <li><a onclick="AWS.User.share_out('qzone');"><i class="icon icon-qzone"></i> QZONE</a></li>
+                      <li><a onclick="AWS.User.share_out('weixin');"><i class="icon icon-wechat"></i> 微信</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <span class="body helpblock">
-            <%= render "/shared/editor_help_block" %>
-          </span>
-        <% end %>
-      <% else %>
-        <div class="alert alert-info">
-          当前设置新手用户不能在 22:00 ~ 9:00 发帖。
         </div>
-      <% end %>
+      </div>
     </div>
-  <% else %>
-      <%= render partial: "topics/translation/need_login_to_reply" %>
-  <% end %>
-</div>
-
-<% if !mobile? %>
-  <div class="sidebar">
-    <%= render "sidebar_box_node_new_topic" %>
-    <%= render "sidebar_box_tips" %>
-    <%= render "sidebar_box_node_recent_topics", topic: @topic %>
   </div>
-<% end %>
+</div>

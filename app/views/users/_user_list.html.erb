@@ -1,0 +1,14 @@
+
+<% @users.each do |user|%>
+	<dl>
+		<dt class="pull-left aw-border-radius-5">
+			<%= link_to user_avatar_tag(user, :normal ), user_path(user) %>
+		</dt>
+		<dd class="pull-left">
+			<a class="aw-user-name" data-id="5" href="http://wenda.bootcss.com/people/jaychou"><%= user.login %>						</a>
+			<p class="signature"></p>
+			<p><b>1</b> 个问题, <b>0</b> 次赞同</p>
+		</dd>
+	</dl>
+<% end %>
+

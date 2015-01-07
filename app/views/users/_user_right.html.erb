@@ -1,29 +1,36 @@
 <div class="col-sm-3 col-md-3 aw-side-bar hidden-sm hidden-xs">
     <!-- 今日话题 -->
     <div class="aw-mod topic-daily hidden-xs">
-        <div class="mod-head" style="margin-left:20px;">
+        <div class="mod-head" style="margin-left:60px;">
             <a class="btn btn-success" href="javascript:;" onclick="disp_create_dialog();">创建球队</a>
-            <a class="btn btn-success" href="javascript:;" onclick="disp_join_dialog();">加入球队</a>
         </div>
     </div>
     <!-- end 今日话题 -->
     <div class="aw-mod">
+        <div class="mod-head">
+            <h3>已创建的球队</h3>
+        </div>
         <div class="mod-body">
-            创建球队注意事项
-            <br/>
-            阿萨德发阿萨德发阿萨德发阿萨德发阿萨德发阿萨德发
-            阿萨德发阿萨德发阿萨德发阿萨德发
-            阿萨德发阿萨德发阿萨德发
+            <%= render :partial => "teams/team_nav", object: @user %>
         </div>
     </div>
     <div class="aw-mod">
+        <div class="mod-head">
+            <h3>已加入的球队</h3>
+        </div>
         <div class="mod-body">
-            加入球队注意事项
-            <br/>
-            阿萨德发阿萨德发阿萨德发阿萨德发阿萨德发
-            阿萨德发阿萨德发阿萨德发
-            阿萨德发阿萨德发阿萨德发
-            阿萨德发阿萨德发
+            <%= render :partial => "teams/team_nav", object: @user %>
+        </div>
+    </div>
+    <div class="aw-mod publish-help">
+        <div class="mod-head">
+            <h3>创建球队指南</h3>
+        </div>
+        <div class="mod-body">
+            <p><b>• 球队名称:</b> 球队名称只允许汉字,英文,数字,下划线, 长度控制在2-14</p>
+            <p><b>• 球队管理:</b> 每个人可以创建一个球队，默认设置为管理员，可以添加球员,
+                上限为30人。
+            </p>
         </div>
     </div>
 </div>

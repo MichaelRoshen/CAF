@@ -40,9 +40,12 @@ class Team
   # has_many :replies, dependent: :destroy
   # embeds_many :authorizations
   # has_many :notifications, class_name: 'Notification::Base', dependent: :delete
-  has_and_belongs_to_many :users
   has_and_belongs_to_many :admins, :class_name=>'User',:inverse_of=>:admin_of
   has_and_belongs_to_many :members, :class_name=>'User',:inverse_of=>:member_of
+
+  def user_count
+    admins.size + members.size    
+  end
   
   def creater_name
     User.find(self.creater_id).try(:login)

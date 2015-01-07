@@ -22,27 +22,6 @@
     </div>
 </div>
 
-<div class="aw-ajax-box" id="aw-ajax-box" >
-    <div class="modal fade alert-box aw-inbox in" id="join_team" style="display: none;" aria-hidden="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a aria-hidden="true" data-dismiss="modal" class="close icon icon-star" type="button" href="javascript:;" onclick="hid_join_dialog();"></a>
-                    <h3 id="myModalLabel" class="modal-title">申请加入球队</h3>
-                </div>
-                <div class="modal-body">
-                        <input type="text" value="" name="team_name" placeholder="填写球队名称" class="form-control" id="invite-input">
-                </div>
-                <div class="modal-footer">
-                    <a class="text-color-999" href="javascript:;" onclick="hid_join_dialog();">取消</a>
-                    <button onclick="CAF.ajax_post();" class="btn btn-large btn-success">发送</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <script type="text/javascript">
     function disp_create_dialog(){
         $("#create_team").show();
