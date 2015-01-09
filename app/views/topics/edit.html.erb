@@ -1,10 +1,12 @@
-<div class="content">
-  <div class="box">
-     <%= render "form" %>
+<div class="container aw-publish">
+  <div class="row">
+    <div class="aw-content-wrap clearfix">
+      <div class="col-sm-12 col-md-9 aw-main-content">
+        <%= render 'form' %>
+      </div>
+      <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+        <%= render 'topic_right' %>        
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="sidebar">
-  <%= render "sidebar_box_node_new_topic" %>
-  <%= render "sidebar_box_new_topic_tip" %>
 </div>

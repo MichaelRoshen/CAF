@@ -4,45 +4,16 @@ class TopicsController < ApplicationController
                                      :favorite, :unfavorite, :follow, :unfollow, :suggest, :unsuggest]
   caches_action :feed, :node_feed, expires_in: 1.hours
 
+  layout 'topics'
+
   def index
-    @suggest_topics = Topic.without_hide_nodes.suggest.limit(3)
+    @suggest_topics = Topic.suggest.limit(3)
     suggest_topic_ids = @suggest_topics.map(&:id)
 
-    @topics = Topic.last_actived.without_hide_nodes.where(:_id.nin => suggest_topic_ids)
+    @topics = Topic.last_actived.where(:_id.nin => suggest_topic_ids)
     @topics = @topics.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
 
-    set_seo_meta t("menu.topics"), "#{Setting.app_name}#{t("menu.topics")}"
-  end
-
-  def feed
-    @topics = Topic.recent.without_body.limit(20).includes(:node, :user, :last_reply_user)
-    render layout: false
-  end
-
-  def node
-    @node = Node.find(params[:id])
-    @topics = @node.topics.last_actived.fields_for_list
-    @topics = @topics.includes(:user).paginate(page: params[:page], per_page: 15)
-    title = @node.jobs? ? @node.name : "#{@node.name} &raquo; #{t("menu.topics")}"
-    set_seo_meta title, "#{Setting.app_name}#{t("menu.topics")}#{@node.name}", @node.summary
-    render action: 'index'
-  end
-
-  def node_feed
-    @node = Node.find(params[:id])
-    @topics = @node.topics.recent.without_body.limit(20)
-    render layout: false
-  end
-
-  %W(no_reply popular).each do |name|
-    define_method(name) do
-      @topics = Topic.send(name.to_sym).last_actived.fields_for_list.includes(:user)
-      @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
-
-      set_seo_meta [t("topics.topic_list.#{name}"), t('menu.topics')].join(' &raquo; ')
-      render action: 'index'
-    end
   end
 
   def recent

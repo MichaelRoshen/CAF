@@ -67,6 +67,6 @@ module TopicsHelper
     return if topic.blank?
     grouped_collection_select :topic, :node_id, Section.all,
                     :sorted_nodes, :name, :id, :name,
-                    {value: topic.node_id, prompt: "选择节点"}, style: "width:145px;"
+                    {value: topic.node_id, prompt: "选择节点"}, {style: "width:145px;float:left;", class: "form-control"}
   end
 end

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render :partial => "layouts/head" %>
+</head>
+<body>
+  <%= render :partial => "layouts/menu" %>
+  <div class="aw-container-wrap">
+    <%= yield %>
+  </div>
+  <%= render :partial => "layouts/footer" %>
+</body>
+</html>

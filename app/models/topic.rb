@@ -76,15 +76,6 @@ class Topic
     where(message_id: message_id).first
   end
 
-  # 排除隐藏的节点
-  def self.without_hide_nodes
-    where(:node_id.nin => self.topic_index_hide_node_ids)
-  end
-
-  def self.topic_index_hide_node_ids
-    SiteConfig.node_ids_hide_in_topics_index.to_s.split(",").collect { |id| id.to_i }
-  end
-
   before_save :store_cache_fields
   def store_cache_fields
     self.node_name = self.node.try(:name) || ""

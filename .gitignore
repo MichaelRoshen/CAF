@@ -16,5 +16,6 @@
 /tmp
 /public/user/*
 /public/uploads/*
+/public/team/*
 app/.DS_Store
 public/.DS_Store

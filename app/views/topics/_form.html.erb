@@ -1,22 +1,22 @@
 <%= simple_form_for @topic do |f| %>
-  <%= render "shared/error_messages", target: @topic %>
-  <div class="control-group">
-    <% if @topic.lock_node == false || admin? %>
-      <span class="node-select">
-        <%= render_topic_node_select_tag(@topic) %>
-      </span>
-    <% end %>
-    <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题.." %>
-  </div>
-  
-  <div class="control-group edit-tools">
-  </div>
-  
-  <div class="control-group">
-    <%= f.text_area :body, class: "topic-editor closewarning form-control" %>
-  </div>
-
-  <div class="control-group">
-    <%= f.submit "保存", class: "btn btn-primary", 'data-disable-with' => "保存中.." %>
+  <div class="aw-mod aw-mod-publish">
+    <div class="mod-body">
+      <h3>标题:</h3>
+      <div class="aw-publish-title active">
+        <div>
+          <%= render_topic_node_select_tag(@topic) %>
+          <%= text_field(:topic, :title, {class: "form-control", placeHolder: "请填写标题.."}) %>
+        </div>
+      </div>
+      <h3>内容:</h3>
+      <div class="aw-mod aw-editor-box">
+        <div class="mod-head">
+          <%= text_area(:topic, :body, {class: "form-control", style: "height:500px;"}) %>
+        </div>
+      </div>
+    </div>
+    <div class="mod-footer clearfix">
+      <%= f.submit "确认发起", class: "btn btn-primary", 'data-disable-with' => "发起中.." %>
+    </div>
   </div>
 <% end %>
