@@ -64,7 +64,7 @@ class User
   index email: 1
   index location: 1
   index({private_token: 1},{ sparse: true })
-
+  has_many :photos
   has_many :topics, dependent: :destroy
   # has_many :notes
   # has_many :replies, dependent: :destroy

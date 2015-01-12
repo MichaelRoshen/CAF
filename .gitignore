@@ -17,5 +17,6 @@
 /public/user/*
 /public/uploads/*
 /public/team/*
+/public/photo/*
 app/.DS_Store
 public/.DS_Store

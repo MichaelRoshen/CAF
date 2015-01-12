@@ -16,10 +16,6 @@ class TopicsController < ApplicationController
 
   end
 
-  def upload_file
-    
-  end
-
   def recent
     @topics = Topic.recent.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
