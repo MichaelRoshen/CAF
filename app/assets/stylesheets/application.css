@@ -17,4 +17,6 @@
  *= require login
  *= require user_setting
  *= require user
+ *= require simditor
+ *= require font-awesome
  */

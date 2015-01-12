@@ -16,6 +16,10 @@ class TopicsController < ApplicationController
 
   end
 
+  def upload_file
+    
+  end
+
   def recent
     @topics = Topic.recent.fields_for_list.includes(:user)
     @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
@@ -89,16 +93,15 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @node = @topic.node
 
-    set_seo_meta "#{t('topics.edit_topic')} &raquo; #{t('menu.topics')}"
+    # set_seo_meta "#{t('topics.edit_topic')} &raquo; #{t('menu.topics')}"
   end
 
   def create
     @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
     @topic.node_id = params[:node] || topic_params[:node_id]
-
     if @topic.save
-      redirect_to(topic_path(@topic.id), notice: t('topics.create_topic_success'))
+      redirect_to(topic_path(@topic.id), notice: "发布成功!")
     else
       render action: 'new'
     end
@@ -127,7 +130,7 @@ class TopicsController < ApplicationController
     @topic.body = topic_params[:body]
 
     if @topic.save
-      redirect_to(topic_path(@topic.id), notice: t('topics.update_topic_success'))
+      redirect_to(topic_path(@topic.id), notice: "更新成功!")
     else
       render action: 'edit'
     end
@@ -136,7 +139,7 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy_by(current_user)
-    redirect_to(topics_path, notice: t('topics.delete_topic_success'))
+    redirect_to(topics_path, notice: "删除成功!")
   end
 
   def favorite

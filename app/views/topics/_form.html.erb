@@ -1,6 +1,9 @@
 <%= simple_form_for @topic do |f| %>
   <div class="aw-mod aw-mod-publish">
     <div class="mod-body">
+      <div style="margin-top:20px;">
+        <%= render "shared/error_messages", target: @topic %>
+      </div>
       <h3>标题:</h3>
       <div class="aw-publish-title active">
         <div>
@@ -20,3 +23,21 @@
     </div>
   </div>
 <% end %>
+
+<script>
+var editor = new Simditor({
+  defaultImage: "<%= asset_path('image.png') %>",
+  textarea: $('#topic_body'),
+  toolbar: ['title','bold','italic','underline',
+            'strikethrough','color','ol','ul','blockquote',
+            'table','link','image','hr'],
+  upload: {
+    url: 'topics/upload_file',
+    params: null,
+    fileKey: 'upload_file',
+    connectionCount: 3,
+    leaveConfirm: '正在上传文件，如果离开上传会自动取消'
+  }
+
+});
+</script>
