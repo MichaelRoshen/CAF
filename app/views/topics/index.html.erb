@@ -1,49 +1,64 @@
-<div class="content">
-  <div class="box box-gray">
-    <div id="node-info">
-      <%= render "topics/node_info", node: @node %>
-    </div>
+<div class="container aw-publish">
+  <div class="row">
+    <div class="aw-content-wrap clearfix">
+      <div class="col-sm-12 col-md-9 aw-main-content">
+        <!-- tab切换 -->
+        <ul class="nav nav-tabs aw-nav-tabs active hidden-xs">
+          <li><a href="http://wenda.bootcss.com/sort_type-unresponsive">等待回复</a></li>
+          <li><a id="sort_control_hot" href="http://wenda.bootcss.com/sort_type-hot__day-7">热门</a></li>
+          <li><a href="http://wenda.bootcss.com/is_recommend-1">推荐</a></li>
+          <li class="active"><a href="">最新</a></li>
 
-    <div class="topics">
-      <% if @topics.current_page == 1 %>
-        <% cache(@suggest_topics) do %>
-          <%= render partial: "topics/topic", collection: @suggest_topics, locals: { suggest: true } %>
-        <% end %>
-      <% end %>
-      <%= render partial: "topics/topic", collection: @topics, locals: { suggest: false } %>
-    </div>
-    <%= will_paginate @topics, inner_window: 2 %>
+          <h2 class="hidden-xs"><i class="icon icon-bookmarks"></i>动态</h2>
+        </ul>
+        <!-- end tab切换 -->
+        <div class="aw-mod aw-explore-list">
+          <div class="mod-body">
+            <div class="aw-common-list">
+              <% @topics.each do |topic| %>
+              <div class="aw-item">
+                <a class="aw-user-name hidden-xs" href="/<%= topic.user.login %>">
+                  <%= user_avatar_tag(topic.user, :normal) %>
+                </a>
+                 
+                <div class="aw-question-content">
+                  <h4>
+                    <%= link_to topic.title, topic_path(topic) %>
+                  </h4>
+                  <div class="pull-right" style="margin-top:-12px;">
+                    <div class="label label-primary">
+                      <%= rand(100)%>
+                    </div>
+                  </div>
+                  <p>
+                    <%= link_to topic.user.login, "/#{topic.user.login}", {class: "aw-user-name"} %>
+                    <span class="text-color-999">
+                      回复了问题 • 6 人喜欢 • 1510 次浏览 • 2014-12-20 12:46        </span>
+                  </p>
 
+                  </div>
+
+               </div>
+               <% end %>
+              </div>
+            </div>
+          <div class="mod-footer">
+            <div class="page-control">
+              <ul class="pagination pull-right">
+                <li class="active"><a href="javascript:;">1</a></li>
+                <li><a href="http://wenda.bootcss.com/sort_type-new__day-0__is_recommend-0__page-2">2</a></li>
+                <li><a href="http://wenda.bootcss.com/sort_type-new__day-0__is_recommend-0__page-3">3</a></li>
+                <li><a href="http://wenda.bootcss.com/sort_type-new__day-0__is_recommend-0__page-4">4</a></li>
+                <li><a href="http://wenda.bootcss.com/sort_type-new__day-0__is_recommend-0__page-2">&gt;</a></li>
+                <li><a href="http://wenda.bootcss.com/sort_type-new__day-0__is_recommend-0__page-9">&gt;&gt;</a></li>
+              </ul>
+            </div>           
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+        <%= render 'topic_right' %>   
+      </div>
+    </div>
   </div>
-
-  <% if controller_name == "topics" && action_name == "index" && !mobile? %>
-    <%= render "/shared/index_sections" %>
-    <%= render "/shared/hot_locations" %>
-  <% end %>
-
-  <% if !@node.blank? %>
-    <% content_for :node_feed_link do %>
-      <%= auto_discovery_link_tag(:rss, feed_node_topics_url, title: "#{@node.name} 节点最新话题") %>
-    <% end %>
-  <% end %>
-
 </div>
-
-<% if current_user %>
-<script type="text/javascript">
-  var readed_topic_ids = <%= current_user.filter_readed_topics(@topics) %>;
-  readed_topic_ids = readed_topic_ids.concat(<%= current_user.filter_readed_topics(@suggest_topics) %>);
-  for (var i = 0; i < readed_topic_ids.length; i++) {
-    topic_id = readed_topic_ids[i];
-    $(".topic-"+ topic_id + " .right-info .count").addClass("state-true");
-  }
-</script>
-<% end %>
-
-<% if !mobile? %>
-  <div class="sidebar">
-    <%= render "topics/sidebar_for_topic_index" if action_name.in?(%w(index)) %>
-    <%= render "topics/sidebar_for_topic_recent" if action_name.in?(%w(recent no_reply popular excellent)) %>
-    <%= render "topics/sidebar_for_topic_node" if action_name == "node" %>
-  </div>
-<% end %>

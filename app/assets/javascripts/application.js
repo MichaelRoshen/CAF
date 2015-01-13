@@ -17,3 +17,4 @@
 //= require hotkeys
 //= require uploader
 //= require simditor
+//= require simditor-mention

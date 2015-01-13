@@ -9,10 +9,9 @@ class TopicsController < ApplicationController
   def index
     @suggest_topics = Topic.suggest.limit(3)
     suggest_topic_ids = @suggest_topics.map(&:id)
-
     @topics = Topic.last_actived.where(:_id.nin => suggest_topic_ids)
     @topics = @topics.fields_for_list.includes(:user)
-    @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+    # @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
 
   end
 
