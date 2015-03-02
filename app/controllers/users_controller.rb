@@ -10,6 +10,11 @@ class UsersController < ApplicationController
      render_404 if @user.nil?
   end
 
+  def show
+    @topics = @user.topics.limit(20)
+    @replies = @user.replies.only(:topic_id, :body_html, :created_at).recent.includes(:topic).limit(10)   
+  end
+
   protected
   def find_user
     # 处理 login 有大写字母的情况

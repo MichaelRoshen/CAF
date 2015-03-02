@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   
   resources :teams
-  resources :topics
+  resources :topics do
+    member do
+      post :reply
+    end
+    resources :replies
+  end
   resources :photos
 
   root to: "home#index"

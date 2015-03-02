@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.timeago
+//= require jquery.timeago.settings
 //= require module
 //= require hotkeys
 //= require uploader

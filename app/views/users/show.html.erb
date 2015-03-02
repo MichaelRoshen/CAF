@@ -38,9 +38,6 @@
                     <div class="mod-footer">
                         <ul class="nav nav-tabs aw-nav-tabs hidden-xs">
                             <li class="active">
-                                <a data-toggle="tab" id="page_actions" href="#actions">动态</a>
-                            </li>
-                            <li>
                                 <a data-toggle="tab" id="page_questions" href="#questions">发帖<span class="badge">0</span></a>
                             </li>
                             <li>
@@ -53,20 +50,23 @@
 
                 <div class="aw-user-center-tab">
                     <div class="tab-content">
-                        <div id="questions" class="tab-pane">
+                        <div id="questions" class="tab-pane active">
                             <div class="aw-mod">
                                 <div class="mod-head">
-                                    <h3>发问</h3>
+                                    <br/>
                                 </div>
                                 <div class="mod-body">
-                                    <div id="contents_user_actions_questions" class="aw-profile-publish-list"><p align="center" style="padding: 15px 0">没有内容</p></div>
-                                </div>
-                                <div class="mod-footer">
-                                    <!-- 加载更多内容 -->
-                                    <a id="bp_user_actions_questions_more" class="aw-load-more-content disabled" data-page="0">
-                                        <span>没有更多了</span>
-                                    </a>
-                                    <!-- end 加载更多内容 -->
+                                    <div id="contents_user_actions">
+                                        <% @topics.each do |topic|%>
+                                        <div class="aw-item">
+                                            <p>
+                                                <span class="pull-right text-color-999">4 个回复 • 1370 次浏览  |  <%= topic.created_at.strftime("%Y-%m-%d") %></span>
+                                                <a href="topics/<%= topic.id %>" class="aw-hide-txt"><%= topic.title %></a>
+
+                                            </p>
+                                        </div>    
+                                        <% end %>
+                                     </div>
                                 </div>
                             </div>
                         </div>
@@ -74,65 +74,19 @@
                         <div id="answers" class="tab-pane">
                             <div class="aw-mod">
                                 <div class="mod-head">
-                                    <h3>最新动态</h3>
+                                    <br/>
                                 </div>
                                 <div class="mod-body">
                                     <div id="contents_user_actions">
-                                        <div class="aw-item">
-                                            <p>
-                                                <span class="pull-right text-color-999">2014-11-28</span>
-                                                <em class="pull-left"><a data-id="377" class="aw-user-name" href="http://wenda.bootcss.com/people/377">chenchao</a> 赞同了该回复:</em>
-                                                
-                                                <a href="http://wenda.bootcss.com/question/104" class="aw-hide-txt">如何实现多张图片的固定比例缩放显示</a>
+                                        <% @replies.each do |reply| %>
+                                            <div class="aw-item">
+                                                <p>
+                                                    <span class="pull-right text-color-999">4 个回复 • 1370 次浏览  |  <%= reply.created_at.strftime("%Y-%m-%d") %></span>
+                                                    <a href="topics/<%= reply.topic.id %>" class="aw-hide-txt"><%= reply.topic.title %></a>
 
-                                            </p>
-                                        </div>
-                                        <div class="aw-item">
-                                            <p>
-                                                <span class="pull-right text-color-999">2014-11-27</span>
-                                                <em class="pull-left"><a data-id="377" class="aw-user-name" href="http://wenda.bootcss.com/people/377">chenchao</a> 回答了问题:</em>
-                                                
-                                                <a href="http://wenda.bootcss.com/question/104" class="aw-hide-txt">如何实现多张图片的固定比例缩放显示</a>
-
-                                            </p>
-                                        </div>
-                                     </div>
-                                </div>
-                                <div class="mod-footer">
-                                    <!-- 加载更多内容 -->
-                                    <a id="bp_user_actions_more" class="aw-load-more-content" data-page="1">
-                                        <span>更多</span>
-                                    </a>
-                                    <!-- end 加载更多内容 -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="actions" class="tab-pane active">
-                            <div class="aw-mod">
-                                <div class="mod-head">
-                                    <h3>最新动态</h3>
-                                </div>
-                                <div class="mod-body">
-                                    <div id="contents_user_actions">
-                                        <div class="aw-item">
-                                        	<p>
-                                        		<span class="pull-right text-color-999">2014-11-28</span>
-                                        		<em class="pull-left"><a data-id="377" class="aw-user-name" href="http://wenda.bootcss.com/people/377">chenchao</a> 赞同了该回复:</em>
-                                        		
-                                        		<a href="http://wenda.bootcss.com/question/104" class="aw-hide-txt">如何实现多张图片的固定比例缩放显示</a>
-
-                                        	</p>
-                                        </div>
-                                        <div class="aw-item">
-                                        	<p>
-                                        		<span class="pull-right text-color-999">2014-11-27</span>
-                                        		<em class="pull-left"><a data-id="377" class="aw-user-name" href="http://wenda.bootcss.com/people/377">chenchao</a> 回答了问题:</em>
-                                        		
-                                        		<a href="http://wenda.bootcss.com/question/104" class="aw-hide-txt">如何实现多张图片的固定比例缩放显示</a>
-
-                                        	</p>
-                                        </div>
+                                                </p>
+                                            </div>
+                                        <% end %>
                                      </div>
                                 </div>
                                 <div class="mod-footer">

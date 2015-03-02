@@ -67,7 +67,7 @@ class User
   has_many :photos
   has_many :topics, dependent: :destroy
   # has_many :notes
-  # has_many :replies, dependent: :destroy
+  has_many :replies, dependent: :destroy
   # embeds_many :authorizations
   # has_many :notifications, class_name: 'Notification::Base', dependent: :delete
   has_and_belongs_to_many :admin_of,  class_name: "Team"

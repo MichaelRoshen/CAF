@@ -105,20 +105,6 @@ class Ability
       can :read,Topic
       can :feed,Topic
       can :node,Topic
-
       can :read, Reply
-
-      can :read, Page
-      can :recent, Page
-      can :preview, Page
-      can :comments, Page
-
-      can :preview, Note
-
-      can :read, Photo
-      can :read, Site
-      can :read, Section
-      can :read, Node
-      can :read, Comment
     end
 end

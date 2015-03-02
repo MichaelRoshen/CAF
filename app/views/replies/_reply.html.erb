@@ -1,0 +1,23 @@
+<%
+  floor = reply_counter + 1
+%>
+<div id="" class="aw-item">
+  <div class="mod-head">
+    <a class="aw-user-img aw-border-radius-5 pull-right" href="/<%= reply.user.login %>">
+      <%= user_avatar_tag(reply.user, :normal) %>
+
+    </a>
+    <div class="title">
+        <span class="text-color-999"><%= floor %>楼 </span>
+        <a data-id="" href="/<%= reply.user.login %>" class="aw-user-name"><%= reply.user.login %> | <%= distance_of_time_in_words_to_now(reply.created_at) %></a>
+        <span class="text-color-999 pull-right">
+        </span>
+    </div>
+  </div>
+  <div class="mod-body clearfix">
+    <div class="markitup-box">
+      <%= raw reply.body %>                   
+    </div>
+  </div>    
+</div>
+ 

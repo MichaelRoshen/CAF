@@ -1,0 +1,3 @@
+<% if @reply.errors.blank? %>
+$(".aw-feed-list").append('<%= j(render("reply", reply: @reply, reply_counter: @topic.replies_count, display_edit: true)) %>')
+<% end %>

@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
     suggest_topic_ids = @suggest_topics.map(&:id)
     @topics = Topic.last_actived.where(:_id.nin => suggest_topic_ids)
     @topics = @topics.fields_for_list.includes(:user)
-    # @topics = @topics.paginate(page: params[:page], per_page: 15, total_entries: 1500)
+    # @topics = @topics.paginate(page: params[:page]||1, per_page: 15, total_entries: 1500)
 
   end
 
@@ -42,7 +42,7 @@ class TopicsController < ApplicationController
     # params[:page] = @topic.last_page_with_per_page(@per_page) if params[:page].blank?
     # @page = params[:page].to_i > 0 ? params[:page].to_i : 1
 
-    # @replies = @topic.replies.unscoped.without_body.asc(:_id)
+    @replies = @topic.replies.asc(:_id)
     # @replies = @replies.paginate(page: @page, per_page: @per_page)
     
     # check_current_user_status_for_topic

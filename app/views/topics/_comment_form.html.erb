@@ -1,0 +1,79 @@
+<%= form_for(Reply.new, remote: true, url: topic_replies_path(@topic)) do |f| %>
+  <div class="aw-mod aw-mod-publish">
+    <div class="mod-body">
+      <div style="margin-top:20px;">
+        <%= render "shared/error_messages", target: @topic %>
+      </div>
+      <h3>回复:</h3>
+      <div class="aw-mod aw-editor-box">
+        <div class="mod-head">
+          <%= f.text_area :body, class: "orm-control", rows: "4", tabindex: "1" %>
+        </div>
+      </div>
+    </div>
+    <div class="mod-footer clearfix">
+      <%= f.submit "回复", class: "btn btn-primary", 'data-disable-with' => "请稍后.." %>
+    </div>
+  </div>
+<% end %>
+<script>
+$(function() {
+      var editor = new Simditor({
+        defaultImage: "<%= asset_path('image.png') %>",
+        textarea: $('#reply_body'),
+        toolbar: ['title','bold','italic','underline',
+                  'strikethrough','color','ol','ul','blockquote','link','image','hr'],
+        placeholder: '这里输入文字...',
+        upload: {
+          url: '/photos',
+          params: null,
+          fileKey: 'upload_file',
+          connectionCount: 3,
+          leaveConfirm: '正在上传文件，如果离开上传会自动取消'
+        },
+        mention:{
+          items:[
+            {
+              id:1,
+              name:"春雨",
+              pinyin:"chunyu",
+              abbr:"cy",
+              url:"http://www.example.com"
+            },
+            {
+              id:2,
+              name:"夏荷",
+              pinyin:"xiahe",
+              abbr:"xh",
+            },
+            {
+              id:3,
+              name:"秋叶",
+              pinyin:"qiuye",
+              abbr:"qy",
+            },
+            {
+              id:4,
+              name:"冬雪",
+              pinyin:"ttt",
+              abbr:"dx",
+            },
+          ],
+          itemRenderer:function($itemEl,data){
+            $span = $('span',$itemEl)
+            $('<img>').insertBefore($span)
+            return $itemEl
+          },
+          linkRenderer:function($linkEl,data){
+            $linkEl.attr('href',"/"+data.pinyin);
+          }
+        },
+      });
+
+      $(editor).on("mention",function(e,el,data){
+        color = ( data.id%2==0? 'blue' : 'red' )
+        $(el).css('color',color);
+      });
+
+    });
+</script>

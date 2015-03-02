@@ -1,3 +1,4 @@
+
 <div class="aw-container-wrap">
   <div class="container">
     <div class="row">
@@ -10,7 +11,7 @@
               </h1>
               <span class="text-color-999">
                 回复了问题 • 6 人关注 • 4 个回复 • 1370 次浏览 • 2014-12-20 12:46
-                <% if current_user.id == @user.id %>
+                <% if current_user && (current_user.id == @topic.user.id) %>
                   <span data-no-turbolink>
                     <a href="<%= edit_topic_path(@topic) %>" >修改<i class="icon icon-quill"></i></a>
                   </span>
@@ -18,7 +19,7 @@
               </span>
               <div class="operate clearfix">
                 <a class="aw-user-nav-dropdown" href="/<%= @topic.user.login %>">
-                  <%= user_avatar_tag(@user, :normal) %>
+                  <%= user_avatar_tag(@topic.user, :normal) %>
                 </a>
                 
               </div>
@@ -55,6 +56,25 @@
             </div>
             <hr>
           </div>
+          <% if current_user %>
+            <div class="aw-mod aw-question-comment">
+              <div class="mod-head">
+                <ul class="nav nav-tabs aw-nav-tabs active">
+                  <h2 class="hidden-xs"><%= @topic.replies.size || 0 %> 个回复</h2>
+                </ul>
+              </div>
+              <div class="mod-body aw-feed-list">
+                <%= render :partial => "replies/reply", collection: @replies %>
+              </div>
+            </div>
+            <%= render :partial => "comment_form"  %>
+          <% else %>
+            <div class="aw-mod aw-replay-box">
+              <a name="answer_form"></a>
+              <p align="center">查看评论请先<a href="/account/sign_in">登录</a>或<a href="/account/sign_up">注册</a></p>
+            </div>          
+          <% end %>
+
         </div>
         <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
           <%= render 'topic_right' %>   
@@ -63,3 +83,4 @@
     </div>
   </div>
 </div>
+

@@ -23,7 +23,9 @@
                  
                 <div class="aw-question-content">
                   <h4>
-                    <%= link_to topic.title, topic_path(topic) %>
+                    <span data-no-turbolink>
+                      <%= link_to topic.title, topic_path(topic) %>
+                    </span>
                   </h4>
                   <div class="pull-right" style="margin-top:-12px;">
                     <div class="label label-primary">

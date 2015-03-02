@@ -1,4 +1,11 @@
 "zh-CN":
+  datetime:
+    distance_in_words:
+      x_minutes: "%{count}分钟前"
+      x_days: "%{count}天前"
+      about_x_hours: "%{count}小时前"
+      less_than_x_minutes: "%{count}分钟前"
+      about_x_months: "%{count}月前"
   omniauth:
     github: GitHub
     twitter: Twitter
