@@ -38,10 +38,10 @@
                     <div class="mod-footer">
                         <ul class="nav nav-tabs aw-nav-tabs hidden-xs">
                             <li class="active">
-                                <a data-toggle="tab" id="page_questions" href="#questions">发帖<span class="badge">0</span></a>
+                                <a data-toggle="tab" id="page_questions" href="#questions">发帖<span class="badge"><%= @topics.length %></span></a>
                             </li>
                             <li>
-                                <a data-toggle="tab" id="page_answers" href="#answers">回贴<span class="badge">1</span></a>
+                                <a data-toggle="tab" id="page_answers" href="#answers">回贴<span class="badge"><%= @replies.length %></span></a>
                             </li>
                         </ul>
                     </div>
@@ -58,14 +58,22 @@
                                 <div class="mod-body">
                                     <div id="contents_user_actions">
                                         <% @topics.each do |topic|%>
-                                        <div class="aw-item">
-                                            <p>
-                                                <span class="pull-right text-color-999">4 个回复 • 1370 次浏览  |  <%= topic.created_at.strftime("%Y-%m-%d") %></span>
-                                                <a href="topics/<%= topic.id %>" class="aw-hide-txt"><%= topic.title %></a>
-
-                                            </p>
-                                        </div>    
+                                            <div class="aw-item">
+                                                <p>
+                                                    <span class="pull-right text-color-999">4 个回复 • 1370 次浏览  |  <%= topic.created_at.strftime("%Y-%m-%d") %></span>
+                                                    <span data-no-turbolink="">
+                                                        <a href="topics/<%= topic.id %>" class="aw-hide-txt"><%= topic.title %></a>
+                                                    </span>
+                                                </p>
+                                            </div>    
                                         <% end %>
+                                        <div class="mod-footer">
+                                            <!-- 加载更多内容 -->
+                                            <a id="bp_user_actions_more" class="aw-load-more-content" data-page="1">
+                                                <span>更多</span>
+                                            </a>
+                                            <!-- end 加载更多内容 -->
+                                        </div>
                                      </div>
                                 </div>
                             </div>
@@ -82,7 +90,9 @@
                                             <div class="aw-item">
                                                 <p>
                                                     <span class="pull-right text-color-999">4 个回复 • 1370 次浏览  |  <%= reply.created_at.strftime("%Y-%m-%d") %></span>
-                                                    <a href="topics/<%= reply.topic.id %>" class="aw-hide-txt"><%= reply.topic.title %></a>
+                                                    <span data-no-turbolink="">
+                                                        <a href="topics/<%= reply.topic.id %>"  class="aw-hide-txt"><%= reply.topic.title %></a>
+                                                    </span>
 
                                                 </p>
                                             </div>

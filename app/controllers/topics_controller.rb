@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
     suggest_topic_ids = @suggest_topics.map(&:id)
     @topics = Topic.last_actived.where(:_id.nin => suggest_topic_ids)
     @topics = @topics.fields_for_list.includes(:user)
-    # @topics = @topics.paginate(page: params[:page]||1, per_page: 15, total_entries: 1500)
+    @topics = @topics.paginate(page: params[:page]||1, per_page: 15, total_entries: 1500)
 
   end
 

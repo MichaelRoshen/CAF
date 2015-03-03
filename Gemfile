@@ -46,6 +46,7 @@ gem 'devise-encryptable', '0.1.2'
 
 # 分页
 gem 'will_paginate', '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.3'
 
 # Markdown 格式 & 文本处理
 gem 'redcarpet', '~> 3.0.0'

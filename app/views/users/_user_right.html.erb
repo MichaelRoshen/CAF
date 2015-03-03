@@ -9,7 +9,11 @@
             <h3>已创建的球队</h3>
         </div>
         <div class="mod-body">
-            <%= render :partial => "teams/team_nav", object: @user %>
+            <% if @user.own_team.present? %>
+                <%= render :partial => "teams/team_nav", object: @user %>
+            <% else %>
+                暂无
+            <% end %>
         </div>
     </div>
     <div class="aw-mod">
@@ -17,7 +21,11 @@
             <h3>已加入的球队</h3>
         </div>
         <div class="mod-body">
-            <%= render :partial => "teams/team_nav", object: @user %>
+            <% if @user.own_team.present? %>
+                <%= render :partial => "teams/team_nav", object: @user %>
+            <% else %>
+                暂无
+            <% end %>
         </div>
     </div>
     <div class="aw-mod publish-help">

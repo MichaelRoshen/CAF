@@ -44,6 +44,8 @@ GEM
     bcrypt (3.1.9)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-will_paginate (0.0.3)
+      will_paginate
     bson (2.3.0)
     builder (3.2.2)
     byebug (3.5.1)
@@ -203,6 +205,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack-action_caching (= 1.1.1)
   auto-space (= 0.0.4)
+  bootstrap-will_paginate (= 0.0.3)
   byebug
   cancancan (~> 1.8.4)
   carrierwave (~> 0.10.0)
